@@ -10,25 +10,24 @@ import java.util.Random;
 
 import static com.example.proje2_1deneme.Main.*;
 
-public class HareketliEngeller extends Engeller{
+public class DinamikEngeller extends Engeller{
 
     private String yon;
-    private int boyut;
+    private int hareketFrenkansi;
 
-
-    public HareketliEngeller(String imagePath, String ad, int engelX, int engelY, int engelBoy, int engelGenislik, String yon, int boyut) {
+    public DinamikEngeller(String imagePath, String ad, int engelX, int engelY, int engelBoy, int engelGenislik, String yon, int hareketFrenkansi) {
         super(imagePath, ad, engelX, engelY, engelBoy, engelGenislik);
-        this.boyut = boyut;
+        this.hareketFrenkansi = hareketFrenkansi;
         this.yon = yon;
     }
 
 
-    static HareketliEngeller kus = new HareketliEngeller("file:///C:\\Users\\musta\\Desktop\\Engeller/",
-            "Kuş.png", 0, 0, 2, 2, "Y", 5);
-    static HareketliEngeller ari = new HareketliEngeller("file:///C:\\Users\\musta\\Desktop\\Engeller/",
+    static DinamikEngeller kus = new DinamikEngeller("file:///C:\\Users\\musta\\Desktop\\Engeller/",
+            "Kuş.png", 0, 0, 2, 2, "Y", 3);
+    static DinamikEngeller ari = new DinamikEngeller("file:///C:\\Users\\musta\\Desktop\\Engeller/",
             "Arı.png", 0, 0, 6, 6, "X", 3);
-    static HareketliEngeller[] hareketliEngeller = {kus, ari};
-    static List<HareketliEngeller> hareketliEngelArrayList = new ArrayList<>();
+    static DinamikEngeller[] dinamikEngeller = {kus, ari};
+    static List<DinamikEngeller> hareketliEngelArrayList = new ArrayList<>();
     static List<ImageView> hareketliEngelImageViews = new ArrayList<>();
 
 
@@ -36,8 +35,8 @@ public class HareketliEngeller extends Engeller{
 
         for (int i = 0; i < 5; i++) {
             Random random = new Random();
-            int a = random.nextInt(hareketliEngeller.length);
-            HareketliEngeller yerlestirilecekHareketliEngel = (HareketliEngeller) hareketliEngeller[a].clone();
+            int a = random.nextInt(dinamikEngeller.length);
+            DinamikEngeller yerlestirilecekHareketliEngel = (DinamikEngeller) dinamikEngeller[a].clone();
             int engelX = (int) (Math.random() * KARE_YUKSEKLIK);
             int engelY = (int) (Math.random() * KARE_GENISLIK);
             yerlestirilecekHareketliEngel.setEngelX(engelX);
@@ -45,7 +44,7 @@ public class HareketliEngeller extends Engeller{
             hareketliEngelArrayList.add(yerlestirilecekHareketliEngel);
         }
 
-        for (HareketliEngeller hareketliEngel : hareketliEngelArrayList) {
+        for (DinamikEngeller hareketliEngel : hareketliEngelArrayList) {
             Image imageHareketliEngel = new Image(hareketliEngel.getImagePath() + hareketliEngel.getAd());
             ImageView imageView = new ImageView(imageHareketliEngel);
             imageView.setId(hareketliEngel.getAd());
@@ -70,20 +69,20 @@ public class HareketliEngeller extends Engeller{
                     double x = imageView.getX();
                     double y = imageView.getY();
 
-                    for (HareketliEngeller hareketliEngel : hareketliEngelArrayList) {
+                    for (DinamikEngeller hareketliEngel : hareketliEngelArrayList) {
                         if (imageView.getId().equals(hareketliEngel.getAd())) {
                             switch (hareketliEngel.yon) {
 
                                 case "Y":
-                                    y += hareketliEngel.boyut;
-                                    if (y >= KARE_YUKSEKLIK * KARE_BOYUTU - hareketliEngel.boyut || y < 0) {
-                                        hareketliEngel.boyut *= -1; // Change direction
+                                    y += hareketliEngel.hareketFrenkansi;
+                                    if (y >= KARE_YUKSEKLIK * KARE_BOYUTU - hareketliEngel.hareketFrenkansi || y < 0) {
+                                        hareketliEngel.hareketFrenkansi *= -1; // Change direction
                                     }
                                     break;
                                 case "X":
-                                    x += hareketliEngel.boyut;
-                                    if (x >= KARE_GENISLIK * KARE_BOYUTU - hareketliEngel.boyut || x < 0) {
-                                        hareketliEngel.boyut *= -1; // Change direction
+                                    x += hareketliEngel.hareketFrenkansi;
+                                    if (x >= KARE_GENISLIK * KARE_BOYUTU - hareketliEngel.hareketFrenkansi || x < 0) {
+                                        hareketliEngel.hareketFrenkansi *= -1; // Change direction
                                     }
                                     break;
                             }

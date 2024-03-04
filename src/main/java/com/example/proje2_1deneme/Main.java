@@ -1,6 +1,5 @@
 package com.example.proje2_1deneme;
 
-import com.example.proje2_1deneme.HareketsizEngeller.*;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -10,7 +9,6 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
-import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
@@ -18,8 +16,9 @@ import java.util.ArrayList;
 
 import java.util.Random;
 
-import static com.example.proje2_1deneme.HareketliEngeller.hareketEttir;
-import static com.example.proje2_1deneme.HareketliEngeller.hareketliEngelOlustur;
+import static com.example.proje2_1deneme.DinamikEngeller.hareketEttir;
+import static com.example.proje2_1deneme.DinamikEngeller.hareketliEngelOlustur;
+import static com.example.proje2_1deneme.SabitEngeller.sabitEngelOlustur;
 
 public class Main extends Application {
 
@@ -38,8 +37,6 @@ public class Main extends Application {
     private Image imageYazEngel5;
     private Image imageYazEngel6;
     private Image imageKarakter;
-    private Image imageDinamikEngel;
-    private Image imageDinamikEngel2;
 
 
     public static void main(String[] args) {
@@ -74,6 +71,7 @@ public class Main extends Application {
                 YazEngelOlustur();
                 try {
                     hareketliEngelOlustur(root);
+                    sabitEngelOlustur(root);
                 } catch (CloneNotSupportedException e) {
                     throw new RuntimeException(e);
                 }
@@ -99,12 +97,13 @@ public class Main extends Application {
         gc = canvas.getGraphicsContext2D();
         YazEngelOlustur();
         hareketliEngelOlustur(root);
+        sabitEngelOlustur(root);
         run();
     }
 
     private void run() {
         drawBackground(gc);
-        EngelCiz(gc);
+        //EngelCiz(gc);
     }
 
     private void drawBackground(GraphicsContext gc) {
@@ -133,31 +132,22 @@ public class Main extends Application {
 
     private void YazEngelOlustur() {
         String imagePath = "file:///C:\\Users\\musta\\Desktop\\Engeller/";
-        imageYazEngel = new Image(imagePath + Dağ.dag);
-        imageYazEngel2 = new Image(imagePath + Duvar.duvar);
-        imageYazEngel3 = new Image(imagePath + Ağaç.agac);
-        imageYazEngel4 = new Image(imagePath + Kaya.kaya);
-        imageYazEngel5 = new Image(imagePath + KarlıOrman.karliOrman);
-        imageYazEngel6 = new Image(imagePath + DağKış.karliDag);
         imageKarakter = new Image(imagePath + Karakter.karakterResim);
     }
 
-    private void EngelCiz(GraphicsContext gc) {
+   /* private void EngelCiz(GraphicsContext gc) {
         ArrayList<Lokasyon> coordinates = new ArrayList<>(); // Engellerin koordinatlarını tutacak ArrayList
         Random random = new Random();
-        int x, y;
+        int x = 0, y = 0;
 
         // Her bir engel çizilmeden önce koordinatların karıştırılması
-        for (int i = 0; i < 9; i++) { // Toplamda engel sayısı kadar "i"
+        for (int i = 0; i < 6; i++) { // Toplamda engel sayısı kadar "i"
             if (i >= 0 && i < 4) {
                 x = (random.nextInt(KARE_GENISLIK/2) + KARE_GENISLIK/2); // Sağ tarafta çizmek için x koordinatı
                 y = (random.nextInt(KARE_YUKSEKLIK)); // Rastgele y koordinatı seçme
             } else if (i >= 4 && i < 6) {
                 x = (random.nextInt(KARE_YUKSEKLIK/2)); // sol tarafta çizmek için x koordinatı seçme
                 y = (random.nextInt(KARE_GENISLIK)); // Rastgele y koordinatı seçme
-            } else {
-                x = (int) (Math.random() * KARE_YUKSEKLIK); // Rastgele x koordinatı seçme
-                y = (int) (Math.random() * KARE_GENISLIK); // Rastgele y koordinatı seçme
             }
 
             // Daha önce seçilen koordinatlarla çakışıp çakışmadığını kontrol etme
@@ -185,12 +175,6 @@ public class Main extends Application {
                     gc.drawImage(imageYazEngel5, x * KARE_BOYUTU, y * KARE_BOYUTU, 120, 120);
                 else if (i == 5)
                     gc.drawImage(imageYazEngel6, x * KARE_BOYUTU, y * KARE_BOYUTU, 120, 120);
-                else if (i == 6)
-                    gc.drawImage(imageDinamikEngel, x * KARE_BOYUTU, y * KARE_BOYUTU, KARE_BOYUTU, KARE_BOYUTU);
-                else if (i == 7)
-                    gc.drawImage(imageDinamikEngel, x * KARE_BOYUTU, y * KARE_BOYUTU, KARE_BOYUTU, KARE_BOYUTU);
-                else if (i == 8)
-                    gc.drawImage(imageDinamikEngel2, x * KARE_BOYUTU, y * KARE_BOYUTU, 60, 60);
             } else {
                 i--; // Eğer çakışma varsa, i'yi azaltarak tekrar deneme yapılmasını sağla
             }
@@ -199,5 +183,5 @@ public class Main extends Application {
         int karakterX = (int) (Math.random() * KARE_YUKSEKLIK);
         int karakterY = (int) (Math.random() * KARE_GENISLIK);
         gc.drawImage(imageKarakter, karakterX * KARE_BOYUTU, karakterY * KARE_BOYUTU, 40, 40);
-    }
+    }*/
 }
