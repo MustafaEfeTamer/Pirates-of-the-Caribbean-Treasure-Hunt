@@ -23,15 +23,20 @@ public class DinamikEngeller extends Engeller{
 
 
     static DinamikEngeller kus = new DinamikEngeller("file:///C:\\Users\\musta\\Desktop\\Engeller/",
-            "Kuş.png", 0, 0, 2, 2, "Y", 3);
+            "Kuş.png", 0, 0, 3, 3, "Y", 1);
     static DinamikEngeller ari = new DinamikEngeller("file:///C:\\Users\\musta\\Desktop\\Engeller/",
-            "Arı.png", 0, 0, 6, 6, "X", 3);
+            "Arı.png", 0, 0, 3, 3, "X", 1);
     static DinamikEngeller[] dinamikEngeller = {kus, ari};
     static List<DinamikEngeller> hareketliEngelArrayList = new ArrayList<>();
     static List<ImageView> hareketliEngelImageViews = new ArrayList<>();
 
 
     public static void hareketliEngelOlustur(Group root) throws CloneNotSupportedException {
+
+        // program her çalıştırıldığında bu method çağırılcak ve aşağıdaki kod her seferinde extra dinamik engel oluşmamasını sağlıyor
+        root.getChildren().removeAll(hareketliEngelImageViews);
+        hareketliEngelImageViews.clear();
+        hareketliEngelArrayList.clear();
 
         for (int i = 0; i < 5; i++) {
             Random random = new Random();

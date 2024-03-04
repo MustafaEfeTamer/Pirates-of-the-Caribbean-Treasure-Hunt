@@ -45,6 +45,12 @@ public class SabitEngeller extends Engeller {
 
 
     public static void sabitEngelOlustur(Group root) throws CloneNotSupportedException {
+
+        // program her çalıştırıldığında bu method çağırılcak ve aşağıdaki kod her seferinde extra sabit engellerin oluşmamasını sağlıyor
+        root.getChildren().removeAll(sabitEngelImageViews);
+        sabitEngelImageViews.clear();
+        sabitEngellerArrayList.clear();
+
         int engelX, engelY;
         Random random = new Random();
 
@@ -56,7 +62,7 @@ public class SabitEngeller extends Engeller {
                 engelX = (int) ((Math.random() * KARE_YUKSEKLIK/2) + KARE_YUKSEKLIK/2);
                 engelY = (int) (Math.random() * KARE_GENISLIK);
             }else{
-                engelX = (int) (Math.random() * KARE_GENISLIK);
+                engelX = (int) (Math.random() * KARE_YUKSEKLIK / 2);
                 engelY = (int) (Math.random() * KARE_GENISLIK);
             }
 
@@ -78,7 +84,6 @@ public class SabitEngeller extends Engeller {
                 i--; // Çakışma varsa i'yi azalt
             }
         }
-
 
         for (SabitEngeller sabitEngel : sabitEngellerArrayList) {
             Image imageSabitEngel = new Image(sabitEngel.getImagePath() + sabitEngel.getAd());

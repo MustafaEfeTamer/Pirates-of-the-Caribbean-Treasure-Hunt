@@ -12,12 +12,10 @@ import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
-import java.util.ArrayList;
-
-import java.util.Random;
 
 import static com.example.proje2_1deneme.DinamikEngeller.hareketEttir;
 import static com.example.proje2_1deneme.DinamikEngeller.hareketliEngelOlustur;
+import static com.example.proje2_1deneme.Karakter.karakterOlustur;
 import static com.example.proje2_1deneme.SabitEngeller.sabitEngelOlustur;
 
 public class Main extends Application {
@@ -29,15 +27,6 @@ public class Main extends Application {
     static final int KARE_BOYUTU = GENISLIK / KARE_YUKSEKLIK;
 
     private GraphicsContext gc;
-
-    private Image imageYazEngel;
-    private Image imageYazEngel2;
-    private Image imageYazEngel3;
-    private Image imageYazEngel4;
-    private Image imageYazEngel5;
-    private Image imageYazEngel6;
-    private Image imageKarakter;
-
 
     public static void main(String[] args) {
         launch();
@@ -64,14 +53,14 @@ public class Main extends Application {
 
                 /*Group root = new Group();
                 Canvas canvas = new Canvas(GENISLIK, YUKSEKLIK);
-                root.getChildren().add(canvas);*/
-
+                root.getChildren().add(canvas);
+                */
                 // Yeni harita oluşturma işlemleri buraya gelebilir
                 drawBackground(gc);
-                YazEngelOlustur();
                 try {
                     hareketliEngelOlustur(root);
                     sabitEngelOlustur(root);
+                    karakterOlustur(root);
                 } catch (CloneNotSupportedException e) {
                     throw new RuntimeException(e);
                 }
@@ -95,9 +84,9 @@ public class Main extends Application {
         primaryStage.setScene(scene);
         primaryStage.show();
         gc = canvas.getGraphicsContext2D();
-        YazEngelOlustur();
         hareketliEngelOlustur(root);
         sabitEngelOlustur(root);
+        karakterOlustur(root);
         run();
     }
 
@@ -129,59 +118,4 @@ public class Main extends Application {
             }
         }
     }
-
-    private void YazEngelOlustur() {
-        String imagePath = "file:///C:\\Users\\musta\\Desktop\\Engeller/";
-        imageKarakter = new Image(imagePath + Karakter.karakterResim);
-    }
-
-   /* private void EngelCiz(GraphicsContext gc) {
-        ArrayList<Lokasyon> coordinates = new ArrayList<>(); // Engellerin koordinatlarını tutacak ArrayList
-        Random random = new Random();
-        int x = 0, y = 0;
-
-        // Her bir engel çizilmeden önce koordinatların karıştırılması
-        for (int i = 0; i < 6; i++) { // Toplamda engel sayısı kadar "i"
-            if (i >= 0 && i < 4) {
-                x = (random.nextInt(KARE_GENISLIK/2) + KARE_GENISLIK/2); // Sağ tarafta çizmek için x koordinatı
-                y = (random.nextInt(KARE_YUKSEKLIK)); // Rastgele y koordinatı seçme
-            } else if (i >= 4 && i < 6) {
-                x = (random.nextInt(KARE_YUKSEKLIK/2)); // sol tarafta çizmek için x koordinatı seçme
-                y = (random.nextInt(KARE_GENISLIK)); // Rastgele y koordinatı seçme
-            }
-
-            // Daha önce seçilen koordinatlarla çakışıp çakışmadığını kontrol etme
-            boolean isOverlap = false;
-            for (Lokasyon lokasyon : coordinates) {
-                if (lokasyon.getX() == x && lokasyon.getY() == y) {
-                    isOverlap = true;
-                    break;
-                }
-            }
-
-            // Eğer çakışma yoksa, bu koordinatları kullanarak engeli çiz
-            if (!isOverlap) {
-                coordinates.add(new Lokasyon(i, x, y)); // Koordinatları ArrayList'e ekleme
-                // Engeli çizme işlemi
-                if (i == 0)
-                    gc.drawImage(imageYazEngel, x * KARE_BOYUTU, y * KARE_BOYUTU, 140, 140);
-                else if (i == 1)
-                    gc.drawImage(imageYazEngel2, x * KARE_BOYUTU, y * KARE_BOYUTU, 40, 40);
-                else if (i == 2)
-                    gc.drawImage(imageYazEngel3, x * KARE_BOYUTU, y * KARE_BOYUTU, 60, 60);
-                else if (i == 3)
-                    gc.drawImage(imageYazEngel4, x * KARE_BOYUTU, y * KARE_BOYUTU, 40, 40);
-                else if (i == 4)
-                    gc.drawImage(imageYazEngel5, x * KARE_BOYUTU, y * KARE_BOYUTU, 120, 120);
-                else if (i == 5)
-                    gc.drawImage(imageYazEngel6, x * KARE_BOYUTU, y * KARE_BOYUTU, 120, 120);
-            } else {
-                i--; // Eğer çakışma varsa, i'yi azaltarak tekrar deneme yapılmasını sağla
-            }
-        }
-        // Karakteri çizmek için ayrı bir koordinat seçme
-        int karakterX = (int) (Math.random() * KARE_YUKSEKLIK);
-        int karakterY = (int) (Math.random() * KARE_GENISLIK);
-        gc.drawImage(imageKarakter, karakterX * KARE_BOYUTU, karakterY * KARE_BOYUTU, 40, 40);
-    }*/
 }
