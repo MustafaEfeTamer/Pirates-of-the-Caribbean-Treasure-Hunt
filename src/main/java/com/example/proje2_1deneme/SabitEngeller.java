@@ -92,8 +92,8 @@ public class SabitEngeller extends Engeller {
 
             imageView.setFitWidth(KARE_BOYUTU * sabitEngel.getEngelGenislik());
             imageView.setFitHeight(KARE_BOYUTU * sabitEngel.getEngelBoy());
-            imageView.setX(sabitEngel.getEngelX() * KARE_BOYUTU);
-            imageView.setY(sabitEngel.getEngelY() * KARE_BOYUTU);
+            imageView.setX(sabitEngel.getEngelX() * KARE_BOYUTU - (imageView.getFitWidth() / 2));
+            imageView.setY(sabitEngel.getEngelY() * KARE_BOYUTU - (imageView.getFitHeight() / 2));
 
             sabitEngelImageViews.add(imageView);
             root.getChildren().add(imageView);

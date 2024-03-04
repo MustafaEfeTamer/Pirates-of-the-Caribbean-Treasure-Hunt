@@ -26,7 +26,6 @@ public class Karakter {
     }
 
     static Karakter karakter = new Karakter("file:///C:\\Users\\musta\\Desktop\\Engeller/", "Mario.png", "Mario", 0, 0);
-    // program her çalıştırıldığında bu method çağırılcak ve aşağıdaki kod her seferinde extra karakter oluşmamasını sağlıyor
     static ImageView karakterImageView = new ImageView();
 
     public static void karakterOlustur(Group root){
@@ -67,7 +66,6 @@ public class Karakter {
 
         root.getChildren().add(karakterImageView);
     }
-
 
 
     public String getImagePath() {

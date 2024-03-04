@@ -56,8 +56,9 @@ public class DinamikEngeller extends Engeller{
 
             imageView.setFitWidth(KARE_BOYUTU * hareketliEngel.getEngelGenislik());
             imageView.setFitHeight(KARE_BOYUTU * hareketliEngel.getEngelBoy());
-            imageView.setX(hareketliEngel.getEngelX() * KARE_BOYUTU);
-            imageView.setY(hareketliEngel.getEngelY() * KARE_BOYUTU);
+            imageView.setX(hareketliEngel.getEngelX() * KARE_BOYUTU - (imageView.getFitWidth() / 2));
+            imageView.setY(hareketliEngel.getEngelY() * KARE_BOYUTU - (imageView.getFitHeight() / 2));
+
 
             hareketliEngelImageViews.add(imageView);
             root.getChildren().add(imageView);
