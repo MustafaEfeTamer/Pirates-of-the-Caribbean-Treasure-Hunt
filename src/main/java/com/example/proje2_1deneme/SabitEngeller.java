@@ -23,23 +23,26 @@ public class SabitEngeller extends Engeller {
 
     static SabitEngeller Agac = new SabitEngeller("file:///C:\\Users\\musta\\Desktop\\Engeller/",
             "Ağaç.png", 0, 0, 2, 2, 1);
-
     static SabitEngeller Dag = new SabitEngeller("file:///C:\\Users\\musta\\Desktop\\Engeller/",
-            "Dağ.png", 0, 0, 6, 6, 1);
-
+            "Dağ.png", 0, 0, 4, 4, 1);
     static SabitEngeller DagKis = new SabitEngeller("file:///C:\\Users\\musta\\Desktop\\Engeller/",
-            "DağKış.png", 0, 0, 6, 6, 2);
-
+            "DağKış.png", 0, 0, 4, 4, 2);
     static SabitEngeller Duvar = new SabitEngeller("file:///C:\\Users\\musta\\Desktop\\Engeller/",
-            "Duvar.png", 0, 0, 6, 6, 1);
-
+            "Duvar.png", 0, 0, 2, 2, 1);
     static SabitEngeller OrmanKis = new SabitEngeller("file:///C:\\Users\\musta\\Desktop\\Engeller/",
-            "KarlıOrman.png", 0, 0, 6, 6, 2);
-
+            "KarlıOrman.png", 0, 0, 4, 4, 2);
+    static SabitEngeller KardanAdam = new SabitEngeller("file:///C:\\Users\\musta\\Desktop\\Engeller/",
+            "KardanAdam.png", 0, 0, 3, 3, 2);
+    static SabitEngeller BuzSarkit = new SabitEngeller("file:///C:\\Users\\musta\\Desktop\\Engeller/",
+            "BuzSarkıtı.png", 0, 0, 2, 2, 2);
+    static SabitEngeller KutupAyisi = new SabitEngeller("file:///C:\\Users\\musta\\Desktop\\Engeller/",
+            "KutupAyısı.png", 0, 0, 2, 2, 2);
+    static SabitEngeller Penguen = new SabitEngeller("file:///C:\\Users\\musta\\Desktop\\Engeller/",
+            "Penguen.png", 0, 0, 2, 2, 2);
     static SabitEngeller Kaya = new SabitEngeller("file:///C:\\Users\\musta\\Desktop\\Engeller/",
-            "Kaya.png", 0, 0, 6, 6, 1);
+            "Kaya.png", 0, 0, 2, 2, 1);
 
-    static SabitEngeller[] sabitEngeller = {Agac, Dag, DagKis, Duvar, OrmanKis, Kaya};
+    static SabitEngeller[] sabitEngeller = {Agac, Dag, DagKis, Duvar, OrmanKis, Kaya, KardanAdam, BuzSarkit, KutupAyisi, Penguen, Kaya};
     static List<SabitEngeller> sabitEngellerArrayList = new ArrayList<>();
     static List<ImageView> sabitEngelImageViews = new ArrayList<>();
 
@@ -54,7 +57,7 @@ public class SabitEngeller extends Engeller {
         int engelX, engelY;
         Random random = new Random();
 
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < 11; i++) {
             int a = random.nextInt(sabitEngeller.length);
             SabitEngeller yerlestirilecekSabitEngel = (SabitEngeller) sabitEngeller[a].clone();
 

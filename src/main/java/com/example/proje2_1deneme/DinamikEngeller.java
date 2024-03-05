@@ -21,11 +21,11 @@ public class DinamikEngeller extends Engeller{
         this.yon = yon;
     }
 
-
     static DinamikEngeller kus = new DinamikEngeller("file:///C:\\Users\\musta\\Desktop\\Engeller/",
-            "Kuş.png", 0, 0, 3, 3, "Y", 1);
+            "Kuş.png", 0, 0, 4, 4, "Y", 1);
     static DinamikEngeller ari = new DinamikEngeller("file:///C:\\Users\\musta\\Desktop\\Engeller/",
-            "Arı.png", 0, 0, 3, 3, "X", 1);
+            "Arı.png", 0, 0, 2, 2, "X", 1);
+
     static DinamikEngeller[] dinamikEngeller = {kus, ari};
     static List<DinamikEngeller> hareketliEngelArrayList = new ArrayList<>();
     static List<ImageView> hareketliEngelImageViews = new ArrayList<>();

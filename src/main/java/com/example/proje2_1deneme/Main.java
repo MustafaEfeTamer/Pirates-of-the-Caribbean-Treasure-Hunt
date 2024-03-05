@@ -8,12 +8,14 @@ import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
+import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 import static com.example.proje2_1deneme.DinamikEngeller.hareketEttir;
 import static com.example.proje2_1deneme.DinamikEngeller.hareketliEngelOlustur;
 import static com.example.proje2_1deneme.Karakter.karakterOlustur;
+//import static com.example.proje2_1deneme.Lokasyon.cisimOlustur;
 import static com.example.proje2_1deneme.SabitEngeller.sabitEngelOlustur;
 
 public class Main extends Application {
@@ -43,6 +45,10 @@ public class Main extends Application {
         Button yeniHaritaButon = new Button("Yeni harita oluştur");
         Button baslatButon = new Button("Başlat");
 
+        // Butonların rengini değiştirmek için CSS özellikleri atıyorum
+        yeniHaritaButon.setStyle("-fx-background-color: #ff0000; -fx-text-fill: white;");
+        baslatButon.setStyle("-fx-background-color: #00ff00; -fx-text-fill: white;");
+
         // Butonların tıklanma olaylarını tanımla
         yeniHaritaButon.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -56,8 +62,9 @@ public class Main extends Application {
                 // Yeni harita oluşturma işlemleri buraya gelebilir
                 drawBackground(gc);
                 try {
-                    hareketliEngelOlustur(root);
                     sabitEngelOlustur(root);
+                    hareketliEngelOlustur(root);
+                    //cisimOlustur(root);
                     karakterOlustur(root);
                 } catch (CloneNotSupportedException e) {
                     throw new RuntimeException(e);
@@ -75,8 +82,15 @@ public class Main extends Application {
             }
         });
 
+        // Butonları HBox'a ekle
+        HBox buttonBox = new HBox(10);
+        buttonBox.getChildren().addAll(yeniHaritaButon, baslatButon);
+        buttonBox.setLayoutX(10);
+        buttonBox.setLayoutY(10);
+        root.getChildren().add(buttonBox);
+
         // Butonları VBox'a ekle
-        root.getChildren().addAll(yeniHaritaButon, baslatButon);
+       // root.getChildren().addAll(yeniHaritaButon, baslatButon);
 
         Scene scene = new Scene(root);
         primaryStage.setScene(scene);
@@ -84,13 +98,13 @@ public class Main extends Application {
         gc = canvas.getGraphicsContext2D();
         hareketliEngelOlustur(root);
         sabitEngelOlustur(root);
+        //cisimOlustur(root);
         karakterOlustur(root);
         run();
     }
 
     private void run() {
         drawBackground(gc);
-        //EngelCiz(gc);
     }
 
     private void drawBackground(GraphicsContext gc) {
