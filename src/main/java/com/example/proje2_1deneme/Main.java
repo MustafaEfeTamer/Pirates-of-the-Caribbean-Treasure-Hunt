@@ -15,7 +15,7 @@ import javafx.stage.Stage;
 import static com.example.proje2_1deneme.DinamikEngeller.hareketEttir;
 import static com.example.proje2_1deneme.DinamikEngeller.hareketliEngelOlustur;
 import static com.example.proje2_1deneme.Karakter.karakterOlustur;
-//import static com.example.proje2_1deneme.Lokasyon.cisimOlustur;
+import static com.example.proje2_1deneme.Lokasyon.cisimOlustur;
 import static com.example.proje2_1deneme.SabitEngeller.sabitEngelOlustur;
 
 public class Main extends Application {
@@ -64,7 +64,7 @@ public class Main extends Application {
                 try {
                     sabitEngelOlustur(root);
                     hareketliEngelOlustur(root);
-                    //cisimOlustur(root);
+                    cisimOlustur(root);
                     karakterOlustur(root);
                 } catch (CloneNotSupportedException e) {
                     throw new RuntimeException(e);
@@ -88,9 +88,7 @@ public class Main extends Application {
         buttonBox.setLayoutX(10);
         buttonBox.setLayoutY(10);
         root.getChildren().add(buttonBox);
-
-        // Butonları VBox'a ekle
-       // root.getChildren().addAll(yeniHaritaButon, baslatButon);
+        
 
         Scene scene = new Scene(root);
         primaryStage.setScene(scene);
@@ -98,7 +96,7 @@ public class Main extends Application {
         gc = canvas.getGraphicsContext2D();
         hareketliEngelOlustur(root);
         sabitEngelOlustur(root);
-        //cisimOlustur(root);
+        cisimOlustur(root);
         karakterOlustur(root);
         run();
     }

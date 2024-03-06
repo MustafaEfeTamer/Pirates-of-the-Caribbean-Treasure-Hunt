@@ -1,4 +1,3 @@
-/*
 package com.example.proje2_1deneme;
 
 import javafx.scene.Group;
@@ -12,7 +11,7 @@ import java.util.Random;
 import static com.example.proje2_1deneme.Main.*;
 import static com.example.proje2_1deneme.Main.KARE_BOYUTU;
 
-public class Lokasyon {
+public class Lokasyon implements Cloneable{
     private String imagePath;
     private String sandik;
     private int koordinatX;
@@ -36,9 +35,7 @@ public class Lokasyon {
     static List<Lokasyon> cisimlerArrayList = new ArrayList<>();
     static List<ImageView> cisimImageViews = new ArrayList<>();
 
-    public String getImagePath() {
-        return imagePath;
-    }
+
 
     public static void cisimOlustur(Group root) throws CloneNotSupportedException {
 
@@ -46,6 +43,7 @@ public class Lokasyon {
         root.getChildren().removeAll(cisimImageViews);
         cisimImageViews.clear();
         cisimlerArrayList.clear();
+
         int engelX, engelY;
         Random random = new Random();
 
@@ -87,6 +85,11 @@ public class Lokasyon {
             cisimImageViews.add(imageView);
             root.getChildren().add(imageView);
         }
+    }
+
+
+    public String getImagePath() {
+        return imagePath;
     }
 
     public void setImagePath(String imagePath) {
@@ -133,4 +136,3 @@ public class Lokasyon {
         this.sandikGenislik = sandikGenislik;
     }
 }
-*/
