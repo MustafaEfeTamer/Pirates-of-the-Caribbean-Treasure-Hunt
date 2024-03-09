@@ -1,6 +1,7 @@
 module com.example.proje2_1deneme {
     requires javafx.controls;
     requires javafx.fxml;
+    requires java.desktop;
 
     opens com.example.proje2_1deneme to javafx.fxml;
     exports com.example.proje2_1deneme;

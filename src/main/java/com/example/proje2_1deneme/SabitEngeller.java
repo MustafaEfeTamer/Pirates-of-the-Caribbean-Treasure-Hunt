@@ -28,7 +28,7 @@ public class SabitEngeller extends Engeller {
     static SabitEngeller DagKis = new SabitEngeller("file:///C:\\Users\\musta\\Desktop\\Engeller/",
             "DağKış.png", 0, 0, 4, 4, 2);
     static SabitEngeller Duvar = new SabitEngeller("file:///C:\\Users\\musta\\Desktop\\Engeller/",
-            "Duvar.png", 0, 0, 2, 2, 1);
+            "Duvar.png", 0, 0, 1, 10, 1);
     static SabitEngeller OrmanKis = new SabitEngeller("file:///C:\\Users\\musta\\Desktop\\Engeller/",
             "KarlıOrman.png", 0, 0, 4, 4, 2);
     static SabitEngeller KardanAdam = new SabitEngeller("file:///C:\\Users\\musta\\Desktop\\Engeller/",
@@ -61,7 +61,7 @@ public class SabitEngeller extends Engeller {
             int a = random.nextInt(sabitEngeller.length);
             SabitEngeller yerlestirilecekSabitEngel = (SabitEngeller) sabitEngeller[a].clone();
 
-            if(yerlestirilecekSabitEngel.mevsim == 1){
+            if(yerlestirilecekSabitEngel.getMevsim() == 1){
                 engelX = (int) ((Math.random() * KARE_YUKSEKLIK/2) + KARE_YUKSEKLIK/2);
                 engelY = (int) (Math.random() * KARE_GENISLIK);
             }else{
@@ -72,7 +72,7 @@ public class SabitEngeller extends Engeller {
             // Çakışma kontrolü
             boolean overlap = false;
             for (SabitEngeller existingEngel : sabitEngellerArrayList) {
-                if (Math.abs(existingEngel.getEngelX() - engelX) < 2 && Math.abs(existingEngel.getEngelY() - engelY) < 2) {
+                if (Math.abs(existingEngel.getEngelX() - engelX) < 5 && Math.abs(existingEngel.getEngelY() - engelY) < 5) { // buradaki 5 diğer sabit nesnelerle arasındaki mesafe. Bu değer ne kadar fazla olursa engeller birbirinden o kadar uzakta olurlar.
                     overlap = true;
                     break;
                 }
@@ -80,8 +80,10 @@ public class SabitEngeller extends Engeller {
 
             // Çakışma yoksa engeli ekle
             if (!overlap) {
+                // engelin x, y sini kur
                 yerlestirilecekSabitEngel.setEngelX(engelX);
                 yerlestirilecekSabitEngel.setEngelY(engelY);
+                // engeli ekle
                 sabitEngellerArrayList.add(yerlestirilecekSabitEngel);
             } else {
                 i--; // Çakışma varsa i'yi azalt
@@ -101,5 +103,14 @@ public class SabitEngeller extends Engeller {
             sabitEngelImageViews.add(imageView);
             root.getChildren().add(imageView);
         }
+    }
+
+
+    public int getMevsim() {
+        return mevsim;
+    }
+
+    public void setMevsim(int mevsim) {
+        this.mevsim = mevsim;
     }
 }

@@ -18,18 +18,26 @@ public class Lokasyon implements Cloneable{
     private int koordinatY;
     private int sandikBoy;
     private int sandikGenislik;
+    private int sandikNumara;
+    private String sandikTur;
 
-    public Lokasyon(String imagePath, String sandik, int koordinatX, int koordinatY, int sandikBoy, int sandikGenislik) {
+    public Lokasyon(String imagePath, String sandik, int koordinatX, int koordinatY, int sandikBoy, int sandikGenislik, int sandikNumar, String sandikTur) {
         this.imagePath = imagePath;
         this.sandik = sandik;
         this.koordinatX = koordinatX;
         this.koordinatY = koordinatY;
         this.sandikBoy = sandikBoy;
         this.sandikGenislik = sandikGenislik;
+        this.sandikNumara = sandikNumara;
+        this.sandikTur = sandikTur;
     }
 
-    static Lokasyon altinSandik = new Lokasyon("file:///C:\\Users\\musta\\Desktop\\Engeller/", "AltınSandık.png", 0, 0, 2, 2);
-    static Lokasyon gumusSandik = new Lokasyon("file:///C:\\Users\\musta\\Desktop\\Engeller/", "GümüşSandık.png", 0, 0, 2, 2);
+    public Lokasyon(){
+
+    }
+
+    static Lokasyon altinSandik = new Lokasyon("file:///C:\\Users\\musta\\Desktop\\Engeller/", "AltınSandık.png", 0, 0, 2, 2, 0, "altın");
+    static Lokasyon gumusSandik = new Lokasyon("file:///C:\\Users\\musta\\Desktop\\Engeller/", "GümüşSandık.png", 0, 0, 2, 2, 0, "gümüş");
 
     static Lokasyon[] cisimler = {altinSandik, gumusSandik};
     static List<Lokasyon> cisimlerArrayList = new ArrayList<>();
@@ -47,9 +55,12 @@ public class Lokasyon implements Cloneable{
         int engelX, engelY;
         Random random = new Random();
 
-        for (int i = 0; i < 2; i++) {
+        for (int i = 0; i < 3; i++) {
             int a = random.nextInt(cisimler.length);
             Lokasyon yerlestirilecekCisim = (Lokasyon) cisimler[a].clone();
+            // sandık numarasını belirle
+            yerlestirilecekCisim.setSandikNumara(i + 1);
+
             engelX = (int) (Math.random() * KARE_YUKSEKLIK);
             engelY = (int) (Math.random() * KARE_GENISLIK);
 
@@ -72,6 +83,13 @@ public class Lokasyon implements Cloneable{
             }
         }
 
+        for (Lokasyon hazine: cisimlerArrayList){
+            System.out.print(hazine.getSandik() + ", ");
+            System.out.print(hazine.getKoordinatX() + ", ");
+            System.out.println(hazine.getKoordinatY());
+        }
+
+
         for (Lokasyon cisim : cisimlerArrayList) {
             Image imageCisim = new Image(cisim.getImagePath() + cisim.getSandik());
             ImageView imageView = new ImageView(imageCisim);
@@ -85,6 +103,9 @@ public class Lokasyon implements Cloneable{
             cisimImageViews.add(imageView);
             root.getChildren().add(imageView);
         }
+
+        Uygulama uygulama = new Uygulama();
+        uygulama.enKisaYolBul();
     }
 
 
@@ -134,5 +155,21 @@ public class Lokasyon implements Cloneable{
 
     public void setSandikGenislik(int sandikGenislik) {
         this.sandikGenislik = sandikGenislik;
+    }
+
+    public int getSandikNumara() {
+        return sandikNumara;
+    }
+
+    public void setSandikNumara(int sandikNumara) {
+        this.sandikNumara = sandikNumara;
+    }
+
+    public String getSandikTur() {
+        return sandikTur;
+    }
+
+    public void setSandikTur(String sandikTur) {
+        this.sandikTur = sandikTur;
     }
 }

@@ -12,6 +12,11 @@ import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import java.io.File;
+
 import static com.example.proje2_1deneme.DinamikEngeller.hareketEttir;
 import static com.example.proje2_1deneme.DinamikEngeller.hareketliEngelOlustur;
 import static com.example.proje2_1deneme.Karakter.karakterOlustur;
@@ -29,6 +34,15 @@ public class Main extends Application {
     private GraphicsContext gc;
 
     public static void main(String[] args) {
+        try {
+            File soundFile = new File("C:\\JavaIntellijKodlarım\\karayip-korsanlari-orjinal-muzik (1).wav");
+            AudioInputStream audioIn = AudioSystem.getAudioInputStream(soundFile);
+            Clip clip = AudioSystem.getClip();
+            clip.open(audioIn);
+            clip.start();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         launch();
     }
 
@@ -53,19 +67,12 @@ public class Main extends Application {
         yeniHaritaButon.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                // Canvas ve Butonlar için VBox oluştur
-
-                /*Group root = new Group();
-                Canvas canvas = new Canvas(GENISLIK, YUKSEKLIK);
-                root.getChildren().add(canvas);
-                */
-                // Yeni harita oluşturma işlemleri buraya gelebilir
                 drawBackground(gc);
                 try {
-                    sabitEngelOlustur(root);
                     hareketliEngelOlustur(root);
-                    cisimOlustur(root);
+                    sabitEngelOlustur(root);
                     karakterOlustur(root);
+                    cisimOlustur(root);
                 } catch (CloneNotSupportedException e) {
                     throw new RuntimeException(e);
                 }
@@ -96,8 +103,8 @@ public class Main extends Application {
         gc = canvas.getGraphicsContext2D();
         hareketliEngelOlustur(root);
         sabitEngelOlustur(root);
-        cisimOlustur(root);
         karakterOlustur(root);
+        cisimOlustur(root);
         run();
     }
 

@@ -44,9 +44,28 @@ public class DinamikEngeller extends Engeller{
             DinamikEngeller yerlestirilecekHareketliEngel = (DinamikEngeller) dinamikEngeller[a].clone();
             int engelX = (int) (Math.random() * KARE_YUKSEKLIK);
             int engelY = (int) (Math.random() * KARE_GENISLIK);
-            yerlestirilecekHareketliEngel.setEngelX(engelX);
-            yerlestirilecekHareketliEngel.setEngelY(engelY);
-            hareketliEngelArrayList.add(yerlestirilecekHareketliEngel);
+
+
+
+            // Çakışma kontrolü
+            boolean overlap = false;
+            for (DinamikEngeller existingEngel : hareketliEngelArrayList) {
+                if (Math.abs(existingEngel.getEngelX() - engelX) < 5 && Math.abs(existingEngel.getEngelY() - engelY) < 5) { // buradaki 5 diğer dinamik nesnelerle arasındaki mesafe. Bu değer ne kadar fazla olursa engeller birbirinden o kadar uzakta olurlar.
+                    overlap = true;
+                    break;
+                }
+            }
+
+            // Çakışma yoksa engeli ekle
+            if (!overlap) {
+                // engelin x, y sini kur
+                yerlestirilecekHareketliEngel.setEngelX(engelX);
+                yerlestirilecekHareketliEngel.setEngelY(engelY);
+                // engeli ekle
+                hareketliEngelArrayList.add(yerlestirilecekHareketliEngel);
+            } else {
+                i--; // Çakışma varsa i'yi azalt
+            }
         }
 
         for (DinamikEngeller hareketliEngel : hareketliEngelArrayList) {
@@ -58,7 +77,6 @@ public class DinamikEngeller extends Engeller{
             imageView.setFitHeight(KARE_BOYUTU * hareketliEngel.getEngelBoy());
             imageView.setX(hareketliEngel.getEngelX() * KARE_BOYUTU - (imageView.getFitWidth() / 2));
             imageView.setY(hareketliEngel.getEngelY() * KARE_BOYUTU - (imageView.getFitHeight() / 2));
-
 
             hareketliEngelImageViews.add(imageView);
             root.getChildren().add(imageView);

@@ -14,18 +14,27 @@ public class Karakter {
     private String imagePath;
     private String karakterId;
     private String ad;
+    private int karakterGenislik;
+    private int karakterBoy;
     private int x;
     private int y;
 
-    public Karakter(String imagePath,String karakterId, String ad, int x, int y) {
+    public Karakter(String imagePath, String karakterId, String ad, int karakterGenislik, int karakterBoy, int x, int y) {
         this.imagePath = imagePath;
         this.karakterId = karakterId;
         this.ad = ad;
+        this.karakterGenislik = karakterGenislik;
+        this.karakterBoy = karakterBoy;
         this.x = x;
         this.y = y;
     }
 
-    static Karakter karakter = new Karakter("file:///C:\\Users\\musta\\Desktop\\Engeller/", "Mario.png", "Mario", 0, 0);
+    public Karakter(){
+
+    }
+
+
+    static Karakter karakter = new Karakter("file:///C:\\Users\\musta\\Desktop\\Engeller/", "Mario.png", "Mario",2,2,0,0);
     static ImageView karakterImageView = new ImageView();
 
     public static void karakterOlustur(Group root){
@@ -36,6 +45,7 @@ public class Karakter {
         Random random = new Random();
         karakter.setX((int) (Math.random() * KARE_GENISLIK));
         karakter.setY((int) (Math.random() * KARE_GENISLIK));
+
         // çakışma var mı kontrol et !!
         for(int i=0; i<SabitEngeller.sabitEngellerArrayList.size(); i++){
             if(karakter.getX() == SabitEngeller.sabitEngellerArrayList.get(i).getEngelX()){
@@ -59,8 +69,8 @@ public class Karakter {
         karakterImageView.setImage(imageKarakter);
         karakterImageView.setId(karakter.getKarakterId());
 
-        karakterImageView.setFitWidth(KARE_BOYUTU * 3);
-        karakterImageView.setFitHeight(KARE_BOYUTU * 3);
+        karakterImageView.setFitWidth(KARE_BOYUTU * karakter.getKarakterGenislik());
+        karakterImageView.setFitHeight(KARE_BOYUTU * karakter.getKarakterBoy());
         karakterImageView.setX(karakter.getX() * KARE_BOYUTU);
         karakterImageView.setY(karakter.getY() * KARE_BOYUTU);
 
@@ -92,6 +102,22 @@ public class Karakter {
         this.ad = ad;
     }
 
+    public int getKarakterGenislik() {
+        return karakterGenislik;
+    }
+
+    public void setKarakterGenislik(int karakterGenislik) {
+        this.karakterGenislik = karakterGenislik;
+    }
+
+    public int getKarakterBoy() {
+        return karakterBoy;
+    }
+
+    public void setKarakterBoy(int karakterBoy) {
+        this.karakterBoy = karakterBoy;
+    }
+
     public int getX() {
         return x;
     }
@@ -106,13 +132,5 @@ public class Karakter {
 
     public void setY(int y) {
         this.y = y;
-    }
-
-    public static Karakter getKarakter() {
-        return karakter;
-    }
-
-    public static void setKarakter(Karakter karakter) {
-        Karakter.karakter = karakter;
     }
 }
