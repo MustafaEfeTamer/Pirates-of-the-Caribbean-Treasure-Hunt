@@ -1,7 +1,5 @@
 package com.example.proje2_1deneme;
 
-
-import javax.swing.*;
 import java.util.ArrayList;
 
 public class Uygulama {
