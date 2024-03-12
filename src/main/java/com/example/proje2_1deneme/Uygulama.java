@@ -1,73 +1,44 @@
 package com.example.proje2_1deneme;
 
 import java.util.ArrayList;
+import static com.example.proje2_1deneme.Hazine.cisimlerArrayList;
 
 public class Uygulama {
-    Karakter karakter = new Karakter();
-    ArrayList<LokasyonParametreler> lokasyonParametrelerArrayList = new ArrayList<>();
+    ArrayList<Lokasyon> mesafeArraylisti = new ArrayList();
+    ArrayList<Lokasyon> sandikSiralamasi = new ArrayList<>();
 
     public void enKisaYolBul(){
-        for(int i = 0; i < 3; i++){
-            if(i == 0){
-                int kenar1 = (int)Math.pow((Lokasyon.cisimlerArrayList.get(i).getKoordinatX() - karakter.getX()), 2) + (int)Math.pow((Lokasyon.cisimlerArrayList.get(i).getKoordinatY() - karakter.getY()), 2);
-                int kenar3 = (int)Math.pow((Lokasyon.cisimlerArrayList.get(i + 2).getKoordinatX() - Lokasyon.cisimlerArrayList.get(i + 1).getKoordinatX()), 2) + (int)Math.pow((Lokasyon.cisimlerArrayList.get(i + 2).getKoordinatY() - Lokasyon.cisimlerArrayList.get(i + 1).getKoordinatY()), 2);
-                for(int j = 0; j < 2; j++){
-                    int kenar2 = (int)Math.pow((Lokasyon.cisimlerArrayList.get(j + 1).getKoordinatX() - Lokasyon.cisimlerArrayList.get(0).getKoordinatX()), 2) + (int)Math.pow((Lokasyon.cisimlerArrayList.get(j + 1).getKoordinatY() - Lokasyon.cisimlerArrayList.get(0).getKoordinatY()), 2);
-                    int yolUzunluk = kenar1 + kenar2 + kenar3;
-
-                    if(j == 0){
-                        lokasyonParametrelerArrayList.add(new LokasyonParametreler(Lokasyon.cisimlerArrayList.get(0).getSandikTur(), Lokasyon.cisimlerArrayList.get(0).getKoordinatX(), Lokasyon.cisimlerArrayList.get(0).getKoordinatY(), Lokasyon.cisimlerArrayList.get(1).getSandikTur(), Lokasyon.cisimlerArrayList.get(1).getKoordinatX(), Lokasyon.cisimlerArrayList.get(1).getKoordinatY(), Lokasyon.cisimlerArrayList.get(2).getSandikTur(), Lokasyon.cisimlerArrayList.get(2).getKoordinatX(), Lokasyon.cisimlerArrayList.get(2).getKoordinatY(), yolUzunluk, 3));
-                    }else{
-                        lokasyonParametrelerArrayList.add(new LokasyonParametreler(Lokasyon.cisimlerArrayList.get(0).getSandikTur(), Lokasyon.cisimlerArrayList.get(0).getKoordinatX(), Lokasyon.cisimlerArrayList.get(0).getKoordinatY(), Lokasyon.cisimlerArrayList.get(2).getSandikTur(), Lokasyon.cisimlerArrayList.get(2).getKoordinatX(), Lokasyon.cisimlerArrayList.get(2).getKoordinatY(), Lokasyon.cisimlerArrayList.get(1).getSandikTur(), Lokasyon.cisimlerArrayList.get(1).getKoordinatX(), Lokasyon.cisimlerArrayList.get(1).getKoordinatY(), yolUzunluk, 3));
-                    }
-                }
-            }else if(i == 1){
-                int kenar1 = (int)Math.pow((Lokasyon.cisimlerArrayList.get(i).getKoordinatX() - karakter.getX()), 2) + (int)Math.pow((Lokasyon.cisimlerArrayList.get(i).getKoordinatY() - karakter.getY()), 2);
-                int kenar3 = (int)Math.pow((Lokasyon.cisimlerArrayList.get(i + 1).getKoordinatX() - Lokasyon.cisimlerArrayList.get(i - 1).getKoordinatX()), 2) + (int)Math.pow((Lokasyon.cisimlerArrayList.get(i + 1).getKoordinatY() - Lokasyon.cisimlerArrayList.get(i - 1).getKoordinatY()), 2);
-                for(int j = 0; j < 2; j++){
-                    if(j == 0){
-                        int kenar2 = (int)Math.pow((Lokasyon.cisimlerArrayList.get(j).getKoordinatX() - Lokasyon.cisimlerArrayList.get(1).getKoordinatX()), 2) + (int)Math.pow((Lokasyon.cisimlerArrayList.get(j).getKoordinatY() - Lokasyon.cisimlerArrayList.get(1).getKoordinatY()), 2);
-                        int yolUzunluk = kenar1 + kenar2 + kenar3;
-
-                        lokasyonParametrelerArrayList.add(new LokasyonParametreler(Lokasyon.cisimlerArrayList.get(1).getSandikTur(), Lokasyon.cisimlerArrayList.get(1).getKoordinatX(), Lokasyon.cisimlerArrayList.get(1).getKoordinatY(), Lokasyon.cisimlerArrayList.get(0).getSandikTur(), Lokasyon.cisimlerArrayList.get(0).getKoordinatX(), Lokasyon.cisimlerArrayList.get(0).getKoordinatY(), Lokasyon.cisimlerArrayList.get(2).getSandikTur(), Lokasyon.cisimlerArrayList.get(2).getKoordinatX(), Lokasyon.cisimlerArrayList.get(2).getKoordinatY(), yolUzunluk, 3));
-                    }else{
-                        int kenar2 = (int)Math.pow((Lokasyon.cisimlerArrayList.get(j + 1).getKoordinatX() - Lokasyon.cisimlerArrayList.get(1).getKoordinatX()), 2) + (int)Math.pow((Lokasyon.cisimlerArrayList.get(j + 1).getKoordinatY() - Lokasyon.cisimlerArrayList.get(1).getKoordinatY()), 2);
-                        int yolUzunluk = kenar1 + kenar2 + kenar3;
-
-                        lokasyonParametrelerArrayList.add(new LokasyonParametreler(Lokasyon.cisimlerArrayList.get(1).getSandikTur(), Lokasyon.cisimlerArrayList.get(1).getKoordinatX(), Lokasyon.cisimlerArrayList.get(1).getKoordinatY(), Lokasyon.cisimlerArrayList.get(2).getSandikTur(), Lokasyon.cisimlerArrayList.get(2).getKoordinatX(), Lokasyon.cisimlerArrayList.get(2).getKoordinatY(), Lokasyon.cisimlerArrayList.get(0).getSandikTur(), Lokasyon.cisimlerArrayList.get(0).getKoordinatX(), Lokasyon.cisimlerArrayList.get(0).getKoordinatY(), yolUzunluk, 3));
-                    }
-                }
-            }else{
-                int kenar1 = (int)Math.pow((Lokasyon.cisimlerArrayList.get(i).getKoordinatX() - karakter.getX()), 2) + (int)Math.pow((Lokasyon.cisimlerArrayList.get(i).getKoordinatY() - karakter.getY()), 2);
-                int kenar3 = (int)Math.pow((Lokasyon.cisimlerArrayList.get(i - 1).getKoordinatX() - Lokasyon.cisimlerArrayList.get(i - 2).getKoordinatX()), 2) + (int)Math.pow((Lokasyon.cisimlerArrayList.get(i - 1).getKoordinatY() - Lokasyon.cisimlerArrayList.get(i - 2).getKoordinatY()), 2);
-                for(int j = 0; j < 2; j++){
-                    int kenar2 = (int)Math.pow((Lokasyon.cisimlerArrayList.get(j).getKoordinatX() - Lokasyon.cisimlerArrayList.get(2).getKoordinatX()), 2) + (int)Math.pow((Lokasyon.cisimlerArrayList.get(j).getKoordinatY() - Lokasyon.cisimlerArrayList.get(2).getKoordinatY()), 2);
-                    int yolUzunluk = kenar1 + kenar2 + kenar3;
-
-                    if(j == 0){
-                        lokasyonParametrelerArrayList.add(new LokasyonParametreler(Lokasyon.cisimlerArrayList.get(2).getSandikTur(), Lokasyon.cisimlerArrayList.get(2).getKoordinatX(), Lokasyon.cisimlerArrayList.get(2).getKoordinatY(), Lokasyon.cisimlerArrayList.get(0).getSandikTur(), Lokasyon.cisimlerArrayList.get(0).getKoordinatX(), Lokasyon.cisimlerArrayList.get(0).getKoordinatY(), Lokasyon.cisimlerArrayList.get(1).getSandikTur(), Lokasyon.cisimlerArrayList.get(1).getKoordinatX(), Lokasyon.cisimlerArrayList.get(1).getKoordinatY(), yolUzunluk, 3));
-                    }else{
-                        lokasyonParametrelerArrayList.add(new LokasyonParametreler(Lokasyon.cisimlerArrayList.get(2).getSandikTur(), Lokasyon.cisimlerArrayList.get(2).getKoordinatX(), Lokasyon.cisimlerArrayList.get(2).getKoordinatY(), Lokasyon.cisimlerArrayList.get(1).getSandikTur(), Lokasyon.cisimlerArrayList.get(1).getKoordinatX(), Lokasyon.cisimlerArrayList.get(1).getKoordinatY(), Lokasyon.cisimlerArrayList.get(0).getSandikTur(), Lokasyon.cisimlerArrayList.get(0).getKoordinatX(), Lokasyon.cisimlerArrayList.get(0).getKoordinatY(), yolUzunluk, 3));
-                    }
-                }
-            }
+        // karakter ile hazineler arasındaki mesafeleri bulup mesafe Arraylistinin içine atıyoruz
+        for(int i = 0; i < cisimlerArrayList.size(); i++){
+           double mesafe =  Math.pow((cisimlerArrayList.get(i).getKoordinatX() - Karakter.karakter.getX()), 2) + Math.pow((cisimlerArrayList.get(i).getKoordinatY() - Karakter.karakter.getY()), 2) ;
+            mesafeArraylisti.add(new Lokasyon(cisimlerArrayList.get(i).getKoordinatX(), cisimlerArrayList.get(i).getKoordinatY(), mesafe, i, cisimlerArrayList.get(i).getSandikTur()));
         }
-        int minimum = lokasyonParametrelerArrayList.get(0).getYolUzunluk();
+        // karaktere en yakın hazineyi ve indeksini bul
+        double minimumMesafe = mesafeArraylisti.get(0).getMesafe();
         int minimumIndex = 0;
-        for(int i = 1; i < lokasyonParametrelerArrayList.size(); i++){
-            if(lokasyonParametrelerArrayList.get(i).getYolUzunluk() < minimum){
-                minimum = lokasyonParametrelerArrayList.get(i).getYolUzunluk();
+        for(int i = 0; i < mesafeArraylisti.size(); i++){
+            if(mesafeArraylisti.get(i).getMesafe() < minimumMesafe){
+                minimumMesafe = mesafeArraylisti.get(i).getMesafe();
                 minimumIndex = i;
             }
         }
+        // hazineye gittikten sonra onun x ve y sini karaktere kur ve güncelle
+        Karakter.karakter.setX(mesafeArraylisti.get(minimumIndex).getxKoordinati());
+        Karakter.karakter.setY(mesafeArraylisti.get(minimumIndex).getyKoordinati());
+        // sandikSiralamasi arraylistine hazineyi ve bilgilerini ekle
+        sandikSiralamasi.add(new Lokasyon(mesafeArraylisti.get(minimumIndex).getxKoordinati(), mesafeArraylisti.get(minimumIndex).getyKoordinati(), mesafeArraylisti.get(minimumIndex).getMesafe(), mesafeArraylisti.get(minimumIndex).getIndex(), mesafeArraylisti.get(minimumIndex).getSandikTurr()));
+        // son olarak cisimlerArrayListinden sandikSiralamasi na eklediğimiz elemanı kaldır ve mesafeArraylistinin içini özyineleme için boşalt.
+        cisimlerArrayList.remove(mesafeArraylisti.get(minimumIndex).getIndex());
+        mesafeArraylisti.clear();
 
-        for(int i = 0; i < 6; i++){
-            System.out.println(lokasyonParametrelerArrayList.get(i).getYolUzunluk());
+        if(cisimlerArrayList.size() > 0){
+            enKisaYolBul();
         }
+    }
 
-        System.out.println("En Kısa Yolun Mesafesi : " + lokasyonParametrelerArrayList.get(minimumIndex).getYolUzunluk() + "\nToplam Adım Sayısı : " + lokasyonParametrelerArrayList.get(minimumIndex).getKacAdim());
-        System.out.println("1. sandik : " + lokasyonParametrelerArrayList.get(minimumIndex).getSandik1Tur() + " (" + lokasyonParametrelerArrayList.get(minimumIndex).getSandik1X() + ", " + lokasyonParametrelerArrayList.get(minimumIndex).getSandik1Y() + ")");
-        System.out.println("2. sandik : " + lokasyonParametrelerArrayList.get(minimumIndex).getSandik2Tur() + " (" + lokasyonParametrelerArrayList.get(minimumIndex).getSandik2X() + ", " + lokasyonParametrelerArrayList.get(minimumIndex).getSandik2Y() + ")");
-        System.out.println("3. sandik : " + lokasyonParametrelerArrayList.get(minimumIndex).getSandik3Tur() + " (" + lokasyonParametrelerArrayList.get(minimumIndex).getSandik3X() + ", " + lokasyonParametrelerArrayList.get(minimumIndex).getSandik3Y() + ")");
+    public void sandikSiralamasi() {
+        for (int i = 0; i < sandikSiralamasi.size(); i++) {
+            System.out.println(sandikSiralamasi.get(i).getSandikTurr() + " sandık toplandı! (" + sandikSiralamasi.get(i).getxKoordinati() + ", " + sandikSiralamasi.get(i).getyKoordinati() + ") konumunda bulundu.");
+        }
     }
 }

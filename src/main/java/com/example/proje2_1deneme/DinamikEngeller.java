@@ -110,7 +110,6 @@ public class DinamikEngeller extends Engeller{
                                     }
                                     break;
                             }
-
                             imageView.setX(x);
                             imageView.setY(y);
                         }

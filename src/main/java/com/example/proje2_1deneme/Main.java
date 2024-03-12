@@ -12,15 +12,11 @@ import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
-import javax.sound.sampled.AudioInputStream;
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.Clip;
-import java.io.File;
-
 import static com.example.proje2_1deneme.DinamikEngeller.hareketEttir;
 import static com.example.proje2_1deneme.DinamikEngeller.hareketliEngelOlustur;
+import static com.example.proje2_1deneme.Karakter.karakterHareket;
 import static com.example.proje2_1deneme.Karakter.karakterOlustur;
-import static com.example.proje2_1deneme.Lokasyon.cisimOlustur;
+import static com.example.proje2_1deneme.Hazine.cisimOlustur;
 import static com.example.proje2_1deneme.SabitEngeller.sabitEngelOlustur;
 
 public class Main extends Application {
@@ -34,21 +30,12 @@ public class Main extends Application {
     private GraphicsContext gc;
 
     public static void main(String[] args) {
-        try {
-            File soundFile = new File("C:\\JavaIntellijKodlarım\\karayip-korsanlari-orjinal-muzik (1).wav");
-            AudioInputStream audioIn = AudioSystem.getAudioInputStream(soundFile);
-            Clip clip = AudioSystem.getClip();
-            clip.open(audioIn);
-            clip.start();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
         launch();
     }
 
     @Override
     public void start(Stage primaryStage) throws CloneNotSupportedException {
-        primaryStage.setTitle("OTONOM HAZİNE AVCISI");
+        primaryStage.setTitle("KARAYIP KORSANLARI🏴‍☠️");
 
         // Canvas ve Butonlar için VBox oluştur
         Group root = new Group();
@@ -85,6 +72,7 @@ public class Main extends Application {
             public void handle(ActionEvent event) {
                 // Başlatma işlemleri buraya gelebilir
                 hareketEttir();
+                karakterHareket(root);
                 run();
             }
         });
@@ -95,8 +83,9 @@ public class Main extends Application {
         buttonBox.setLayoutX(10);
         buttonBox.setLayoutY(10);
         root.getChildren().add(buttonBox);
-        
 
+       /* root.getChildren().clear();
+        Scene scene = new Scene(new Group(root), GENISLIK, YUKSEKLIK);*/
         Scene scene = new Scene(root);
         primaryStage.setScene(scene);
         primaryStage.show();
