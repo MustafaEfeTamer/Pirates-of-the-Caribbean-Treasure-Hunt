@@ -142,7 +142,7 @@ public class AnaArayuz extends Application {
     }
 
     public static void main(String[] args) {
-       /* try {
+      /*  try {
             File soundFile = new File("C:\\JavaIntellijKodlarım\\karayip-korsanlari-orjinal-muzik (1).wav");
             AudioInputStream audioIn = AudioSystem.getAudioInputStream(soundFile);
             Clip clip = AudioSystem.getClip();

@@ -6,6 +6,7 @@ import static com.example.proje2_1deneme.Hazine.cisimlerArrayList;
 public class Uygulama {
     ArrayList<Lokasyon> mesafeArraylisti = new ArrayList();
     static ArrayList<Lokasyon> sandikSiralamasi = new ArrayList<>();
+    static ArrayList<Lokasyon> clonedList  = new ArrayList<>();
 
 
     public void enKisaYolBul(){
@@ -40,6 +41,10 @@ public class Uygulama {
     public void sandikSiralamasi() {
         for (int i = 0; i < sandikSiralamasi.size(); i++) {
             System.out.println(sandikSiralamasi.get(i).getSandikTurr() + " sandık toplandı! (" + sandikSiralamasi.get(i).getxKoordinati() + ", " + sandikSiralamasi.get(i).getyKoordinati() + ") konumunda bulundu.");
+        }
+        // sandik sıralamasının kendisiniden bağımsız bir klonunu oluşturuyor.
+        for(Lokasyon eleman : sandikSiralamasi){
+            clonedList.add(new Lokasyon(eleman.getxKoordinati(), eleman.getyKoordinati(), eleman.getMesafe(), eleman.getIndex(), eleman.getSandikTurr()));
         }
     }
 }

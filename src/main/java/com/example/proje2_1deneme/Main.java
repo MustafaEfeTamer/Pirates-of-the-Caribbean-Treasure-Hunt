@@ -10,7 +10,10 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
+import org.w3c.dom.Text;
 
 import static com.example.proje2_1deneme.DinamikEngeller.hareketEttir;
 import static com.example.proje2_1deneme.DinamikEngeller.hareketliEngelOlustur;
@@ -27,10 +30,15 @@ public class Main extends Application {
     static final int KARE_BOYUTU = GENISLIK / KARE_YUKSEKLIK;
 
     private GraphicsContext gc;
+    static Canvas kutuCanvas;
+    static GraphicsContext kutuGc;
 
     public static void main(String[] args) {
         launch();
     }
+
+
+
 
     @Override
     public void start(Stage primaryStage) throws CloneNotSupportedException {
@@ -40,6 +48,20 @@ public class Main extends Application {
         Group root = new Group();
         Canvas canvas = new Canvas(GENISLIK, YUKSEKLIK);
         root.getChildren().add(canvas);
+
+        // kutuCanvas kutucuğunun genişlik boyutunu ve yükseklik boyutunu ayarlar
+        kutuCanvas = new Canvas(420, 50);
+        // kutuCanvas'ı root grubuna ekle
+        root.getChildren().add(kutuCanvas);
+        // kutuCanvas'ın konumunu ayarlar
+        kutuCanvas.setLayoutX(380);
+        kutuCanvas.setLayoutY(5);
+        // kutuCanvas'ın arka plan rengini ayarlar
+        kutuCanvas.setStyle("-fx-background-color: #E9967A;");
+        // kutuGc'nin yazı rengini, yazı tipini, ve kalınlığını ayarlar
+        kutuGc = kutuCanvas.getGraphicsContext2D();
+        kutuGc.setFill(Color.RED);
+        kutuGc.setFont(Font.font("Arial", FontWeight.BOLD, 15));
 
         // "Yeni harita oluştur" ve "Başlat" butonlarını oluştur
         Button yeniHaritaButon = new Button("Yeni harita oluştur");

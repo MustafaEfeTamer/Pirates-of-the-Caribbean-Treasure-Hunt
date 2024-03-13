@@ -45,6 +45,8 @@ public class Hazine implements Cloneable{
     static List<Hazine> cisimlerArrayList = new ArrayList<>();
     static List<ImageView> cisimImageViews = new ArrayList<>();
 
+    static List<Koordinat> ImageViewsKoordinatlari = new ArrayList<>();
+
 
 
     public static void cisimOlustur(Group root) throws CloneNotSupportedException {
@@ -107,6 +109,8 @@ public class Hazine implements Cloneable{
             imageView.setFitHeight(KARE_BOYUTU * cisim.getSandikBoy());
             imageView.setX(cisim.getKoordinatX() * KARE_BOYUTU - (imageView.getFitWidth() / 2));
             imageView.setY(cisim.getKoordinatY() * KARE_BOYUTU - (imageView.getFitHeight() / 2));
+            // cisimlerArrayListinin içindeki daha en kısa yola göre sıralanmamış hazinelerin koordinatlarını teker teker ImageViewsKoordinatlar arraylistine atarız
+            ImageViewsKoordinatlari.add(new Koordinat(cisim.getKoordinatX(), cisim.getKoordinatY()));
 
             cisimImageViews.add(imageView);
             root.getChildren().add(imageView);
