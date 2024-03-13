@@ -20,8 +20,11 @@ public class Karakter {
     private int karakterBoy;
     private int x;
     private int y;
+    private int startX;
+    private int startY;
 
-    public Karakter(String imagePath, String karakterId, String ad, int karakterGenislik, int karakterBoy, int x, int y) {
+
+    public Karakter(String imagePath, String karakterId, String ad, int karakterGenislik, int karakterBoy, int x, int y, int startX, int startY) {
         this.imagePath = imagePath;
         this.karakterId = karakterId;
         this.ad = ad;
@@ -29,6 +32,8 @@ public class Karakter {
         this.karakterBoy = karakterBoy;
         this.x = x;
         this.y = y;
+        this.startX = startX;
+        this.startY = startY;
     }
 
     public Karakter(){
@@ -36,7 +41,7 @@ public class Karakter {
     }
 
 
-    static Karakter karakter = new Karakter("file:///C:\\Users\\musta\\Desktop\\Engeller/", "JackSparrow.png", "JackSparrow",1,1,0,0);
+    static Karakter karakter = new Karakter("file:///C:\\Users\\musta\\Desktop\\Engeller/", "JackSparrow.png", "JackSparrow",1,1,0,0, 0, 0);
     static ImageView karakterImageView = new ImageView();
 
     public static void karakterOlustur(Group root){
@@ -52,7 +57,7 @@ public class Karakter {
 
         // karakter - sabit engel çakışma kontrolü
         boolean overlap = false;
-        for (SabitEngeller existingEngel : SabitEngeller.sabitEngellerArrayList) {
+        /*for (SabitEngeller existingEngel : SabitEngeller.sabitEngellerArrayList) {
             if (Math.abs(existingEngel.getEngelX() - engelX) < 5 && Math.abs(existingEngel.getEngelY() - engelY) < 5) { // buradaki 5 diğer sabit nesnelerle arasındaki mesafe. Bu değer ne kadar fazla olursa engeller birbirinden o kadar uzakta olurlar.
                 overlap = true;
                 break;
@@ -73,37 +78,26 @@ public class Karakter {
                 overlap = true;
                 break;
             }
-        }
+        }*/
 
         // Çakışma yoksa engelin x, y sini kur
         if (!overlap) {
             karakter.setX(engelX);
             karakter.setY(engelY);
+
+            karakter.setStartX(karakter.getX());
+            karakter.setStartY(karakter.getY());
+
         } else {
             karakterOlustur(root);
         }
 
-        karakter.setX((int) (Math.random() * KARE_GENISLIK - 2));
-        karakter.setY((int) (Math.random() * KARE_GENISLIK - 2));
+        // biraz bekle sonra sil
+        //karakter.setX((int) (Math.random() * KARE_GENISLIK - 2));
+        //karakter.setY((int) (Math.random() * KARE_GENISLIK - 2));
 
-        /*// çakışma var mı kontrol et !!
-        for(int i=0; i<SabitEngeller.sabitEngellerArrayList.size(); i++){
-            if(karakter.getX() == SabitEngeller.sabitEngellerArrayList.get(i).getEngelX()){
-                karakterOlustur(root);
-            }else if(true){
-                for(int j=0; j<DinamikEngeller.hareketliEngelArrayList.size(); j++){
-                    if(karakter.getX() == DinamikEngeller.hareketliEngelArrayList.get(j).getEngelX()){
-                        karakterOlustur(root);
-                    }else{
-                        break;
-                    }
-                }
-            }
-            else{
-                break;
-            }
-        }
-*/
+        System.out.println(karakter.getX() + ", " + karakter.getY());  // denemek için
+
         // Önceki ImageView'i güncelle
         Image imageKarakter = new Image(karakter.getImagePath() + karakter.getKarakterId());
         karakterImageView.setImage(imageKarakter);
@@ -118,34 +112,76 @@ public class Karakter {
     }
 
     public static void karakterHareket(Group root) {
-
+        Uygulama uygulama = new Uygulama();
         AtomicInteger index = new AtomicInteger(0);
         Timer timer = new Timer();
-        Koordinat.koordinatlar.add(new Koordinat(karakter.getX(), karakter.getY()));
-        Koordinat.koordinatlar.add(new Koordinat(karakter.getX() + 1, karakter.getY()));
-        Koordinat.koordinatlar.add(new Koordinat(karakter.getX() + 2, karakter.getY()));
-        Koordinat.koordinatlar.add(new Koordinat(karakter.getX() + 3, karakter.getY()));
-        Koordinat.koordinatlar.add(new Koordinat(karakter.getX() + 4, karakter.getY()));
-        Koordinat.koordinatlar.add(new Koordinat(karakter.getX() + 5, karakter.getY()));
-        Koordinat.koordinatlar.add(new Koordinat(karakter.getX() + 6, karakter.getY()));
+        int startX, startY, endX, endY, currentX, currentY;
 
-        timer.scheduleAtFixedRate(new TimerTask() {
-            @Override
-            public void run() {
-                Platform.runLater(() -> {
-                    Koordinat kordinat = Koordinat.koordinatlar.get(index.get());
+        for(int i = 0; i < 20; i++) {
+            // Başlangıç ve bitiş noktaları
+            if (i == 0) {
+                startX = karakter.getX();
+                startY = karakter.getY();
+                Koordinat.koordinatlar.add(new Koordinat(startX, startY));
 
-                    karakterImageView.setX(kordinat.getX() * KARE_BOYUTU);
-                    karakterImageView.setY(kordinat.getY() * KARE_BOYUTU);
+                endX = uygulama.sandikSiralamasi.get(0).getxKoordinati();
+                endY = uygulama.sandikSiralamasi.get(0).getyKoordinati();
+            } else {
+                startX = uygulama.sandikSiralamasi.get(i - 1).getxKoordinati();
+                startY = uygulama.sandikSiralamasi.get(i - 1).getyKoordinati();
 
-                    index.incrementAndGet();
-
-                    if (index.get() >= Koordinat.koordinatlar.size()) {
-                        timer.cancel();
-                    }
-                });
+                endX = uygulama.sandikSiralamasi.get(i).getxKoordinati();
+                endY = uygulama.sandikSiralamasi.get(i).getyKoordinati();
             }
-        }, 0, 1000); // 100 milisaniye (0.1 saniye) aralıklarla hareket et
+
+
+            // X ve Y koordinatlarına göre adım adım hareket et
+            currentX = startX;
+            currentY = startY;
+
+            while (currentX != endX || currentY != endY) {
+                // Hedefe ulaşıncaya kadar x ve y koordinatlarını güncelle
+                if (currentX != endX) {
+                    if (currentX < endX) {
+                        currentX++;
+                    } else if (currentX > endX) {
+                        currentX--;
+                    }
+                } else {
+                    if (currentY < endY) {
+                        currentY++;
+                    } else if (currentY > endY) {
+                        currentY--;
+                    }
+                }
+
+                // Güncellenmiş koordinatları listeye ekle
+                Koordinat.koordinatlar.add(new Koordinat(currentX, currentY));
+            }
+        }
+
+            // karakteri koordinatlar arraylistine göre hareket ettirme
+            timer.scheduleAtFixedRate(new TimerTask() {
+                @Override
+                public void run() {
+                    Platform.runLater(() -> {
+                        Koordinat kordinat = Koordinat.koordinatlar.get(index.get());
+
+                        karakterImageView.setX(kordinat.getX() * KARE_BOYUTU);
+                        karakterImageView.setY(kordinat.getY() * KARE_BOYUTU);
+
+                        index.incrementAndGet();
+
+                        if (index.get() >= Koordinat.koordinatlar.size()) {
+                            timer.cancel();
+                        }
+                    });
+                }
+            }, 0, 500); // 100 milisaniye (0.1 saniye) aralıklarla hareket et
+
+
+        // bir sonraki yeni harita oluştururken sandikSiralamasi arraylistinin içindeki mevcut şeylere yenileri eklenmesin diye resetliyoruz.
+        Uygulama.sandikSiralamasi.clear();
     }
 
 
@@ -202,5 +238,21 @@ public class Karakter {
 
     public void setY(int y) {
         this.y = y;
+    }
+
+    public int getStartX() {
+        return startX;
+    }
+
+    public void setStartX(int startX) {
+        this.startX = startX;
+    }
+
+    public int getStartY() {
+        return startY;
+    }
+
+    public void setStartY(int startY) {
+        this.startY = startY;
     }
 }

@@ -5,7 +5,8 @@ import static com.example.proje2_1deneme.Hazine.cisimlerArrayList;
 
 public class Uygulama {
     ArrayList<Lokasyon> mesafeArraylisti = new ArrayList();
-    ArrayList<Lokasyon> sandikSiralamasi = new ArrayList<>();
+    static ArrayList<Lokasyon> sandikSiralamasi = new ArrayList<>();
+
 
     public void enKisaYolBul(){
         // karakter ile hazineler arasındaki mesafeleri bulup mesafe Arraylistinin içine atıyoruz

@@ -14,9 +14,8 @@ import javafx.stage.Stage;
 
 import static com.example.proje2_1deneme.DinamikEngeller.hareketEttir;
 import static com.example.proje2_1deneme.DinamikEngeller.hareketliEngelOlustur;
-import static com.example.proje2_1deneme.Karakter.karakterHareket;
-import static com.example.proje2_1deneme.Karakter.karakterOlustur;
 import static com.example.proje2_1deneme.Hazine.cisimOlustur;
+import static com.example.proje2_1deneme.Karakter.*;
 import static com.example.proje2_1deneme.SabitEngeller.sabitEngelOlustur;
 
 public class Main extends Application {
@@ -70,6 +69,10 @@ public class Main extends Application {
         baslatButon.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
+                /* enKisaYolBul methodunda karakterin 'x' ve 'y' koordinatlarını değiştiriyoruz. Böylece son hali ile ilk hali aynı olmuyor
+                 bu yüzden startX ve startY değerlerimizle her şey bittikten sonra başlat butonuna bastığımızda x ve y değerlerini eski haline getiriyoruz.*/
+                karakter.setX(karakter.getStartX());
+                karakter.setY(karakter.getStartY());
                 // Başlatma işlemleri buraya gelebilir
                 hareketEttir();
                 karakterHareket(root);
