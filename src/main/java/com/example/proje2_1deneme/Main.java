@@ -13,10 +13,8 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
-import org.w3c.dom.Text;
 
-import static com.example.proje2_1deneme.DinamikEngeller.hareketEttir;
-import static com.example.proje2_1deneme.DinamikEngeller.hareketliEngelOlustur;
+import static com.example.proje2_1deneme.DinamikEngeller.*;
 import static com.example.proje2_1deneme.Hazine.cisimOlustur;
 import static com.example.proje2_1deneme.Karakter.*;
 import static com.example.proje2_1deneme.SabitEngeller.sabitEngelOlustur;
@@ -29,15 +27,13 @@ public class Main extends Application {
     static final int KARE_GENISLIK = 40;
     static final int KARE_BOYUTU = GENISLIK / KARE_YUKSEKLIK;
 
-    private GraphicsContext gc;
+    static GraphicsContext gc;
     static Canvas kutuCanvas;
     static GraphicsContext kutuGc;
 
     public static void main(String[] args) {
         launch();
     }
-
-
 
 
     @Override
@@ -66,10 +62,12 @@ public class Main extends Application {
         // "Yeni harita oluştur" ve "Başlat" butonlarını oluştur
         Button yeniHaritaButon = new Button("Yeni harita oluştur");
         Button baslatButon = new Button("Başlat");
+        Button sonucButon = new Button("Sonuç");
 
         // Butonların rengini değiştirmek için CSS özellikleri atıyorum
         yeniHaritaButon.setStyle("-fx-background-color: #ff0000; -fx-text-fill: white;");
         baslatButon.setStyle("-fx-background-color: #00ff00; -fx-text-fill: white;");
+        sonucButon.setStyle("-fx-background-color: #0000ff; -fx-text-fill: white;");
 
         // Butonların tıklanma olaylarını tanımla
         yeniHaritaButon.setOnAction(new EventHandler<ActionEvent>() {
@@ -102,15 +100,29 @@ public class Main extends Application {
             }
         });
 
+        sonucButon.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                SonucArayuz sonucArayuz = new SonucArayuz();
+                drawBackground(gc);
+                try {
+                    sonucArayuz.start(new Stage());
+                } catch (CloneNotSupportedException e) {
+                    throw new RuntimeException(e);
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
+                run();
+            }
+        });
+
         // Butonları HBox'a ekle
         HBox buttonBox = new HBox(10);
-        buttonBox.getChildren().addAll(yeniHaritaButon, baslatButon);
+        buttonBox.getChildren().addAll(yeniHaritaButon, baslatButon, sonucButon);
         buttonBox.setLayoutX(10);
         buttonBox.setLayoutY(10);
         root.getChildren().add(buttonBox);
 
-       /* root.getChildren().clear();
-        Scene scene = new Scene(new Group(root), GENISLIK, YUKSEKLIK);*/
         Scene scene = new Scene(root);
         primaryStage.setScene(scene);
         primaryStage.show();
@@ -141,12 +153,23 @@ public class Main extends Application {
         for (int i = KARE_YUKSEKLIK/2; i < KARE_YUKSEKLIK; i++) {
             for (int j = 0; j < KARE_GENISLIK; j++) {
                 if ((i + j) % 2 == 0) {
-                    gc.setFill(Color.web("#008000"));
+                    gc.setFill(Color.web("#66ff00"));
                 } else {
                     gc.setFill(Color.web("#ffffff"));
                 }
                 gc.fillRect(i * KARE_BOYUTU, j * KARE_BOYUTU, KARE_BOYUTU, KARE_BOYUTU);
             }
         }
+    }
+
+    // karakterin geçtiği izlediği yolu yeşil renge boyar
+    public static void drawCharacterPath(GraphicsContext gc, int karakterX, int karakterY){
+        gc.setFill(Color.web("#008000"));
+        gc.fillRect(karakterX * KARE_BOYUTU, karakterY * KARE_BOYUTU, KARE_BOYUTU, KARE_BOYUTU);
+    }
+    // dinamik engellerin izlediği yolu kırmızıya boyar
+    public static void drawDynamicObstaclePath(GraphicsContext gc, int hareketliEngelX, int hareketliEngelY){
+        gc.setFill(Color.web("FF0000"));
+        gc.fillRect(hareketliEngelX * KARE_BOYUTU, hareketliEngelY * KARE_BOYUTU, KARE_BOYUTU, KARE_BOYUTU);
     }
 }

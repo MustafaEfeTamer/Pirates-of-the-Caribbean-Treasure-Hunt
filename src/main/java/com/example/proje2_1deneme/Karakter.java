@@ -2,10 +2,8 @@ package com.example.proje2_1deneme;
 
 import javafx.application.Platform;
 import javafx.scene.Group;
-import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-
 import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -40,7 +38,6 @@ public class Karakter {
     public Karakter(){
 
     }
-
 
     static Karakter karakter = new Karakter("file:///C:\\Users\\musta\\Desktop\\Engeller/", "JackSparrow.png", "JackSparrow",1,1,0,0, 0, 0);
     static ImageView karakterImageView = new ImageView();
@@ -173,6 +170,9 @@ public class Karakter {
                         karakterImageView.setX(kordinat.getX() * KARE_BOYUTU);
                         karakterImageView.setY(kordinat.getY() * KARE_BOYUTU);
 
+                        // Main deki karakterin arkasından giden yeşil yolu yapıyor !!
+                        Main.drawCharacterPath(gc, kordinat.getX(), kordinat.getY());
+
                         ImageView hazineImageView = null;
                         int i;
 
@@ -203,7 +203,6 @@ public class Karakter {
                     });
                 }
             }, 0, 500); // 100 milisaniye (0.1 saniye) aralıklarla hareket et
-
 
         // bir sonraki yeni harita oluştururken sandikSiralamasi arraylistinin içindeki mevcut şeylere yenileri eklenmesin diye resetliyoruz.
         Uygulama.sandikSiralamasi.clear();

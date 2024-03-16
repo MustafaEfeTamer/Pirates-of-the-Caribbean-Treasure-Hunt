@@ -1,12 +1,13 @@
 package com.example.proje2_1deneme;
 
-import javafx.animation.AnimationTimer;
+import javafx.animation.Animation;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.scene.Group;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
+import javafx.util.Duration;
+import java.util.*;
 
 import static com.example.proje2_1deneme.Main.*;
 
@@ -22,7 +23,7 @@ public class DinamikEngeller extends Engeller{
     }
 
     static DinamikEngeller kus = new DinamikEngeller("file:///C:\\Users\\musta\\Desktop\\Engeller/",
-            "Kuş.png", 0, 0, 4, 4, "Y", 1);
+            "Kuş.png", 0, 0, 2, 2, "Y", 1);
     static DinamikEngeller ari = new DinamikEngeller("file:///C:\\Users\\musta\\Desktop\\Engeller/",
             "Arı.png", 0, 0, 2, 2, "X", 1);
 
@@ -38,7 +39,7 @@ public class DinamikEngeller extends Engeller{
         hareketliEngelImageViews.clear();
         hareketliEngelArrayList.clear();
 
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < 3; i++) {
             Random random = new Random();
             int a = random.nextInt(dinamikEngeller.length);
             DinamikEngeller yerlestirilecekHareketliEngel = (DinamikEngeller) dinamikEngeller[a].clone();
@@ -46,11 +47,17 @@ public class DinamikEngeller extends Engeller{
             int engelY = (int) (Math.random() * KARE_GENISLIK);
 
 
-
             // Çakışma kontrolü
             boolean overlap = false;
             for (DinamikEngeller existingEngel : hareketliEngelArrayList) {
                 if (Math.abs(existingEngel.getEngelX() - engelX) < 5 && Math.abs(existingEngel.getEngelY() - engelY) < 5) { // buradaki 5 diğer dinamik nesnelerle arasındaki mesafe. Bu değer ne kadar fazla olursa engeller birbirinden o kadar uzakta olurlar.
+                    overlap = true;
+                    break;
+                }
+            }
+
+            for (SabitEngeller existingEngel : SabitEngeller.sabitEngellerArrayList) {
+                if (Math.abs(existingEngel.getEngelX() - engelX) < 5 && Math.abs(existingEngel.getEngelY() - engelY) < 5) { // buradaki 5 diğer sabit nesnelerle arasındaki mesafe. Bu değer ne kadar fazla olursa engeller birbirinden o kadar uzakta olurlar.
                     overlap = true;
                     break;
                 }
@@ -85,38 +92,59 @@ public class DinamikEngeller extends Engeller{
 
 
     public static void hareketEttir() {
-        AnimationTimer timer = new AnimationTimer() {
-            @Override
-            public void handle(long now) {
-                for (ImageView imageView : hareketliEngelImageViews) {
 
-                    double x = imageView.getX();
-                    double y = imageView.getY();
+        // Hareketin hızını ve toplam hareket mesafelerini alıyoruz.
+        final double[] hareketMesafesi = {0.5};//1 br hareket ediyor her seferinde (hızı)
+        final double[] toplamHareket = {0};
 
-                    for (DinamikEngeller hareketliEngel : hareketliEngelArrayList) {
-                        if (imageView.getId().equals(hareketliEngel.getAd())) {
-                            switch (hareketliEngel.yon) {
+        final double[] hareketMesafesi1 = {0.5};//1 br hareket ediyor her seferinde (hızı)
+        final double[] toplamHareket1 = {0};
 
-                                case "Y":
-                                    y += hareketliEngel.hareketFrenkansi;
-                                    if (y >= KARE_YUKSEKLIK * KARE_BOYUTU - hareketliEngel.hareketFrenkansi || y < 0) {
-                                        hareketliEngel.hareketFrenkansi *= -1; // Change direction
-                                    }
-                                    break;
-                                case "X":
-                                    x += hareketliEngel.hareketFrenkansi;
-                                    if (x >= KARE_GENISLIK * KARE_BOYUTU - hareketliEngel.hareketFrenkansi || x < 0) {
-                                        hareketliEngel.hareketFrenkansi *= -1; // Change direction
-                                    }
-                                    break;
+        // harekelti engellerin hareketi burada sağlanıyor
+        Timeline timeline = new Timeline(new KeyFrame(
+                Duration.millis(16), // Frame Time (60 FPS için 16ms)
+                event -> {
+                    for (int i = 0; i < hareketliEngelArrayList.size(); i++) {
+                        // Kuş için
+                        if(hareketliEngelArrayList.get(i).getAd().equals("Kuş.png")){
+                            // kuşun yolunu kırmızıya boyamak için
+                            for(int j=0; j<5; j++){
+                                drawDynamicObstaclePath(gc, hareketliEngelArrayList.get(i).getEngelX(), hareketliEngelArrayList.get(i).getEngelY() + j);
+                                drawDynamicObstaclePath(gc, hareketliEngelArrayList.get(i).getEngelX() - 1, hareketliEngelArrayList.get(i).getEngelY() + j);
                             }
-                            imageView.setX(x);
-                            imageView.setY(y);
+                            // Y pozisyonunu sürekli güncelle
+                            hareketliEngelImageViews.get(i).setTranslateY(hareketliEngelImageViews.get(i).getTranslateY() + hareketMesafesi[0] );//sürekli 1 br translate ediyor
+                            // Kuş için toplam hareket kuşun hareket edeceği boyutu geçtiyse yönü tersine çevir
+                            if (Math.abs(toplamHareket[0]) >= 9 * KARE_BOYUTU) {
+                                hareketMesafesi[0] *= -1;//- yönde hareket etmeye başlıyo
+                                toplamHareket[0] = 0;
+                            }
+                            // Toplam hareketi güncelle
+                            toplamHareket[0] += hareketMesafesi[0];
+                        }
+
+                        // Arı için
+                        else if(hareketliEngelArrayList.get(i).getAd().equals("Arı.png")){
+                            // arının yolunu kırmızıya boyamak için
+                            for(int j = 0; j < 2; j++){
+                                drawDynamicObstaclePath(gc, hareketliEngelArrayList.get(i).getEngelX(), hareketliEngelArrayList.get(i).getEngelY() - j);
+                                drawDynamicObstaclePath(gc, hareketliEngelArrayList.get(i).getEngelX() + 1, hareketliEngelArrayList.get(i).getEngelY() - j);
+                                drawDynamicObstaclePath(gc, hareketliEngelArrayList.get(i).getEngelX() + 2, hareketliEngelArrayList.get(i).getEngelY() - j);
+                            }
+
+                            hareketliEngelImageViews.get(i).setTranslateX(hareketliEngelImageViews.get(i).getTranslateX()+hareketMesafesi1[0]);
+                            if(Math.abs(toplamHareket1[0]) >= 5 * KARE_BOYUTU){
+                                hareketMesafesi1[0] *=-1;
+                                toplamHareket1[0]=0;
+                            }
+                            // Toplam hareketi güncelle
+                            toplamHareket1[0] += hareketMesafesi1[0];
                         }
                     }
                 }
-            }
-        };
-        timer.start();
+        ));
+        timeline.setCycleCount(Animation.INDEFINITE); // Sonsuz döngüye sok
+        // Timeline'ı başlat
+        timeline.play();
     }
 }

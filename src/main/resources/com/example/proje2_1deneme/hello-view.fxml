@@ -1,14 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.image.*?>
+<?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane fx:id="scene" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.proje2_1deneme.HelloController">
-    <children>
-        <ImageView fx:id="runner" fitHeight="100.0" fitWidth="100.0" layoutX="139.0" layoutY="150.0" pickOnBounds="true" preserveRatio="true">
-            <image>
-                <Image url="@sprites/Mario.png" />
-            </image>
-        </ImageView>
-    </children>
+<AnchorPane fx:id="scene" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.proje2_1deneme.SonucArayuz">
+   <children>
+      <Pane layoutX="17.0" layoutY="13.0" prefHeight="611.0" prefWidth="774.0">
+         <children>
+            <HBox layoutX="41.0" layoutY="16.0" prefHeight="560.0" prefWidth="261.0">
+               <children>
+                  <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="30.0" prefWidth="262.0" text="Değer Sırasına Göre KeşfedilenHazineler" />
+               </children>
+            </HBox>
+            <HBox layoutX="338.0" layoutY="10.0" prefHeight="586.0" prefWidth="207.0">
+               <children>
+                  <Label alignment="CENTER" prefHeight="29.0" prefWidth="176.0" text="Gidilen Koordinatlar" />
+               </children>
+            </HBox>
+            <HBox layoutX="560.0" layoutY="11.0" prefHeight="122.0" prefWidth="185.0">
+               <children>
+                  <Label alignment="CENTER" prefHeight="31.0" prefWidth="186.0" text="Toplam Adım Sayısı" />
+               </children>
+            </HBox>
+         </children>
+      </Pane>
+   </children>
 </AnchorPane>
