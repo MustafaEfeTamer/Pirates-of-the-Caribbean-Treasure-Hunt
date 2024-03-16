@@ -105,6 +105,7 @@ public class Main extends Application {
             public void handle(ActionEvent event) {
                 SonucArayuz sonucArayuz = new SonucArayuz();
                 drawBackground(gc);
+
                 try {
                     sonucArayuz.start(new Stage());
                 } catch (CloneNotSupportedException e) {

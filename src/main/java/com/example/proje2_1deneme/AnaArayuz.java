@@ -4,6 +4,7 @@ import com.example.proje2_1deneme.Main;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.fxml.FXML;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -65,7 +66,7 @@ public class AnaArayuz extends Application {
     }
 
     public static void main(String[] args) {
-      /*  try {
+        try {
             File soundFile = new File("C:\\JavaIntellijKodlarım\\karayip-korsanlari-orjinal-muzik (1).wav");
             AudioInputStream audioIn = AudioSystem.getAudioInputStream(soundFile);
             Clip clip = AudioSystem.getClip();
@@ -73,7 +74,7 @@ public class AnaArayuz extends Application {
             clip.start();
         } catch (Exception e) {
             e.printStackTrace();
-        }*/
+        }
         launch(args);
     }
 }

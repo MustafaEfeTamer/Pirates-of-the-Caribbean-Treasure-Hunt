@@ -94,7 +94,7 @@ public class Karakter {
         //karakter.setX((int) (Math.random() * KARE_GENISLIK - 2));
         //karakter.setY((int) (Math.random() * KARE_GENISLIK - 2));
 
-        System.out.println(karakter.getX() + ", " + karakter.getY());  // denemek için
+        System.out.println("Karakterin konumu : (" + karakter.getX() + ", " + karakter.getY() + ")");  // denemek için
 
         // Önceki ImageView'i güncelle
         Image imageKarakter = new Image(karakter.getImagePath() + karakter.getKarakterId());
