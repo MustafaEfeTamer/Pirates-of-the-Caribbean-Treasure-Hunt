@@ -39,12 +39,16 @@ public class Uygulama {
     }
 
     public void sandikSiralamasi() {
+        // bir sonraki harita yenilenmesi için clonedListin içini boşaltıyoruz!!
+        Uygulama.clonedList.clear();
         for (int i = 0; i < sandikSiralamasi.size(); i++) {
             System.out.println(sandikSiralamasi.get(i).getSandikTurr() + " sandık toplandı! (" + sandikSiralamasi.get(i).getxKoordinati() + ", " + sandikSiralamasi.get(i).getyKoordinati() + ") konumunda bulundu.");
         }
+        System.out.println("\n");
         // sandik sıralamasının kendisiniden bağımsız bir klonunu oluşturuyor.
         for(Lokasyon eleman : sandikSiralamasi){
             clonedList.add(new Lokasyon(eleman.getxKoordinati(), eleman.getyKoordinati(), eleman.getMesafe(), eleman.getIndex(), eleman.getSandikTurr()));
         }
+        sandikSiralamasi.clear();
     }
 }

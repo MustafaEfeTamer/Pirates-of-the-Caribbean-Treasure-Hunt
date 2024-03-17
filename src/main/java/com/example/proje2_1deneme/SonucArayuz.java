@@ -29,8 +29,6 @@ public class SonucArayuz extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("hello-view.fxml"));
-        //field1.setText("efelikk");
-
         primaryStage.setTitle("Sonuç Ekranı");
         Scene scene = new Scene(root, 800, 800);
         primaryStage.setScene(scene);

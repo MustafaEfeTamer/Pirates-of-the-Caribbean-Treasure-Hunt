@@ -20,7 +20,6 @@ import static com.example.proje2_1deneme.Karakter.*;
 import static com.example.proje2_1deneme.SabitEngeller.sabitEngelOlustur;
 
 public class Main extends Application {
-
     static final int GENISLIK = 800;
     static final int YUKSEKLIK = 800;
     static final int KARE_YUKSEKLIK = 40;

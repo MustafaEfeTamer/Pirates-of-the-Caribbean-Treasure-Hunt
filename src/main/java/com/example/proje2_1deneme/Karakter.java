@@ -55,28 +55,6 @@ public class Karakter {
 
         // karakter - sabit engel çakışma kontrolü
         boolean overlap = false;
-        /*for (SabitEngeller existingEngel : SabitEngeller.sabitEngellerArrayList) {
-            if (Math.abs(existingEngel.getEngelX() - engelX) < 5 && Math.abs(existingEngel.getEngelY() - engelY) < 5) { // buradaki 5 diğer sabit nesnelerle arasındaki mesafe. Bu değer ne kadar fazla olursa engeller birbirinden o kadar uzakta olurlar.
-                overlap = true;
-                break;
-            }
-        }
-
-        // karakter - hareketli engel çakışma kontrolü
-        for (DinamikEngeller existingEngel : DinamikEngeller.hareketliEngelArrayList) {
-            if (Math.abs(existingEngel.getEngelX() - engelX) < 5 && Math.abs(existingEngel.getEngelY() - engelY) < 5) { // buradaki 5 diğer hareketli nesnelerle arasındaki mesafe. Bu değer ne kadar fazla olursa engeller birbirinden o kadar uzakta olurlar.
-                overlap = true;
-                break;
-            }
-        }
-
-        // karakter - hazine çakışma kontrolü
-        for (Hazine existingEngel : Hazine.cisimlerArrayList) {
-            if (Math.abs(existingEngel.getKoordinatX() - engelX) < 5 && Math.abs(existingEngel.getKoordinatY() - engelY) < 5) { // buradaki 5 hazinelerle arasındaki mesafe. Bu değer ne kadar fazla olursa engeller birbirinden o kadar uzakta olurlar.
-                overlap = true;
-                break;
-            }
-        }*/
 
         // Çakışma yoksa engelin x, y sini kur
         if (!overlap) {
@@ -89,10 +67,6 @@ public class Karakter {
         } else {
             karakterOlustur(root);
         }
-
-        // biraz bekle sonra sil
-        //karakter.setX((int) (Math.random() * KARE_GENISLIK - 2));
-        //karakter.setY((int) (Math.random() * KARE_GENISLIK - 2));
 
         System.out.println("Karakterin konumu : (" + karakter.getX() + ", " + karakter.getY() + ")");  // denemek için
 
@@ -110,6 +84,8 @@ public class Karakter {
     }
 
     public static void karakterHareket(Group root) {
+        Koordinat.koordinatlar.clear();
+
         Uygulama uygulama = new Uygulama();
         AtomicInteger index = new AtomicInteger(0);
         AtomicInteger deger = new AtomicInteger(0);
@@ -121,18 +97,19 @@ public class Karakter {
             if (i == 0) {
                 startX = karakter.getX();
                 startY = karakter.getY();
+
                 Koordinat.koordinatlar.add(new Koordinat(startX, startY));
 
-                endX = uygulama.sandikSiralamasi.get(0).getxKoordinati();
-                endY = uygulama.sandikSiralamasi.get(0).getyKoordinati();
+                endX = Uygulama.clonedList.get(0).getxKoordinati();
+                endY = Uygulama.clonedList.get(0).getyKoordinati();
+
             } else {
-                startX = uygulama.sandikSiralamasi.get(i - 1).getxKoordinati();
-                startY = uygulama.sandikSiralamasi.get(i - 1).getyKoordinati();
+                startX = Uygulama.clonedList.get(i-1).getxKoordinati();
+                startY = Uygulama.clonedList.get(i-1).getyKoordinati();
 
-                endX = uygulama.sandikSiralamasi.get(i).getxKoordinati();
-                endY = uygulama.sandikSiralamasi.get(i).getyKoordinati();
+                endX = Uygulama.clonedList.get(i).getxKoordinati();
+                endY = Uygulama.clonedList.get(i).getyKoordinati();
             }
-
 
             // X ve Y koordinatlarına göre adım adım hareket et
             currentX = startX;
@@ -206,6 +183,8 @@ public class Karakter {
 
         // bir sonraki yeni harita oluştururken sandikSiralamasi arraylistinin içindeki mevcut şeylere yenileri eklenmesin diye resetliyoruz.
         Uygulama.sandikSiralamasi.clear();
+        deger.set(0);
+        index.set(0);
     }
 
 

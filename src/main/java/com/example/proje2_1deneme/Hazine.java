@@ -50,6 +50,8 @@ public class Hazine implements Cloneable{
 
 
     public static void cisimOlustur(Group root) throws CloneNotSupportedException {
+        // Bir sonraki harita için içini boşalt
+        ImageViewsKoordinatlari.clear();
 
         // program her çalıştırıldığında bu method çağırılcak ve aşağıdaki kod her seferinde extra hazinelerin oluşmamasını sağlıyor
         root.getChildren().removeAll(cisimImageViews);
